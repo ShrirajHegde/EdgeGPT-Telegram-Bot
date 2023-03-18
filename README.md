@@ -58,17 +58,17 @@ according to your configuration.
   >   - **webhook**: `true` to run the bot using webhooks.
   >   `false` to use polling.
   >
-  >   - **log_level**: set level of the logging module.
+  >   - **log_level**: level of the logging module.
   >   More info: [log levels](https://docs.python.org/3/library/logging.html#logging-levels)
   >
   >   - **ip**: Your server/home IP. Must be accessible from internet.
   >
   >   - **port**: Port to receive telegram updates. Allowed ports: `443`, `80`, `88` and `8443`
-  >     > Nginx can be used as reverse in order to use other ports.
+  >     > Nginx can be used as reverse proxy, allowing other ports usage.
   >     > Copy `templates/nginx.conf` to config and change values according
   >     > to your configuration.
   >     >
-  >     > - `<docker-host-ip>` is the gateway of the containers. Looks like `172.17.0.1`
+  >     > - `<docker-host-ip>` is the gateway of the container. Looks like `172.17.0.1`
   >     > - `<portX>` Can be any port in the user range.
   >     ```bash
   >     $ cp templates/nginx.conf config/nginx.con
@@ -77,8 +77,15 @@ according to your configuration.
   >
   >   - **cert**: Path to your server certificate (can be self-signed)
   >
-  >   - **assemblyai_token**: Your AssemblyAI token, required to use ASR.
-  >   More info: [Supported Languages](https://www.assemblyai.com/docs#supported-languages)
+  >   - **chat_engine**: Engine to be used in the chat. Allowed values: `edgegpt`, `chatgpt`, `chatgpt4`
+  >
+  >   - **asr_engine**: Engine to be used in the ASR. Allowed values: `whisper`, `assemblyai`
+  >
+  > - **api**:
+  >     - **openai**: Your OpenAI token, required to use `chat_engine:chatgpt` and/or `asr_engine:whisper`.
+  >     More info: [Supported Languages](https://help.openai.com/en/articles/7031512-whisper-api-faq)
+  >     - **assemblyai**: Your AssemblyAI token, required to use `asr_engine:assemblyai`.
+  >     More info: [Supported Languages](https://www.assemblyai.com/docs#supported-languages)
   >
   > - **chats**:
   >   - **password**: Password to use with /unlock and gain access to the
@@ -86,10 +93,10 @@ according to your configuration.
   >     ```json
   >     "password": "supersecurepassword123"
   >     ```
-  >   - **id**: List of telegram IDs allowed in the bot, without password. Obtain
-  >   if from bots like [@getmyid\_bot](https://t.me/getmyid_bot).
+  >   - **id**: List of telegram IDs allowed in the bot without unlocking. Obtain
+  >   your telegram ID from bots like [@getmyid\_bot](https://t.me/getmyid_bot).
   >     ```json
-  >     "ids": [
+  >     "id": [
   >         123123123,
   >         132322322
   >     ]
